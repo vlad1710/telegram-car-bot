@@ -11,14 +11,14 @@
     <form action="${regUrl}" method="POST">
         Login:<br/><input type="text" name="login" value="${login}"><br/>
         Password:<br/><input type="password" name="password"><br/>
-        E-mail:<br/><input type="text" name="email"><br/>
-        Phone:<br/><input type="text" name="phone"><br/>
         <input type="submit" />
 
         <c:if test="${exists ne null}">
             <p>User already exists!</p>
         </c:if>
     </form>
+
+    <p><a href="/register">Register new user</a></p>
 </div>
 </body>
 </html>

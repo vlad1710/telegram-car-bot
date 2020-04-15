@@ -1,7 +1,6 @@
 package com.example.telegramcarbot;
 
 import com.example.telegramcarbot.User.CustomUser;
-import com.example.telegramcarbot.User.UserRole;
 import com.example.telegramcarbot.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -33,8 +32,6 @@ public class MyController {
 
         model.addAttribute("login", login);
         model.addAttribute("roles", user.getAuthorities());
-        model.addAttribute("email", dbUser.getEmail());
-        model.addAttribute("phone", dbUser.getPhone());
 
         return "index";
     }
@@ -42,13 +39,6 @@ public class MyController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@RequestParam(required = false) String email,
                          @RequestParam(required = false) String phone) {
-        User user = (User) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        String login = user.getUsername();
-        userService.updateUser(login, email, phone);
 
         return "redirect:/";
     }
@@ -56,12 +46,10 @@ public class MyController {
     @RequestMapping(value = "/newuser", method = RequestMethod.POST)
     public String update(@RequestParam String login,
                          @RequestParam String password,
-                         @RequestParam(required = false) String email,
-                         @RequestParam(required = false) String phone,
                          Model model) {
         String passHash = passwordEncoder.encodePassword(password, null);
 
-        if ( ! userService.addUser(login, passHash, UserRole.USER, email, phone)) {
+        if ( ! userService.addUser(login, passHash)) {
             model.addAttribute("exists", true);
             model.addAttribute("login", login);
             return "register";

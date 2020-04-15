@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Prog.kiev.ua</title>
+    <title>Login page</title>
 </head>
 <body>
     <div align="center">
@@ -13,14 +13,13 @@
             Password:<br/><input type="password" name="j_password"><br/>
             <input type="submit" />
 
-            <p><a href="/register">Register new user</a></p>
 
             <c:if test="${param.error ne null}">
                 <p>Wrong login or password!</p>
             </c:if>
 
             <c:if test="${param.logout ne null}">
-                <p>Chao!</p>
+                <p>You are logged out.</p>
             </c:if>
         </form>
     </div>
