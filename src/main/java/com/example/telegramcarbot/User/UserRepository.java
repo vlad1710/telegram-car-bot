@@ -1,4 +1,4 @@
-package com.telegramcarbot.User;
+package com.example.telegramcarbot.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

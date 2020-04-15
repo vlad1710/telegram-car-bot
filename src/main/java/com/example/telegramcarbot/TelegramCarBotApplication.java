@@ -13,6 +13,7 @@ public class TelegramCarBotApplication {
         SpringApplication.run(TelegramCarBotApplication.class, args);
     }
 
+
     @Bean
     public UrlBasedViewResolver setupViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
