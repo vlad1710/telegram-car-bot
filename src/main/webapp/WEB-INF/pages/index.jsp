@@ -1,25 +1,98 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-    <title>Prog.kiev.ua</title>
+    <title>Пошук ТЗ</title>
+
+    <meta name="viewport" content="width=10, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>body {
+        background: #fefcea; /* Для старых браузров */
+        background: linear-gradient(to top, #fefcea, #aaadf1);
+        padding: 10px;
+        border: 1px solid #333;
+        font-family: "Myriad Pro";
+        font-style: oblique;
+        vertical-align: center;
+    }
+
+    .table tr, .table td, .table th {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    </style>
 </head>
 <body>
-    <div align="center">
-        <h1>Your login is: ${login}, your roles are:</h1>
-        <c:forEach var="s" items="${roles}">
-            <h3><c:out value="${s}" /></h3>
+<div align="center">
+
+    <h3>Пошук ТЗ</h3>
+    <form action="/getcar" method="POST">
+
+        <h4>ДНЗ</h4>
+        <input type="text" name="dnz" class="form-control" style="width: 300px"><br/>
+        <h4>VIN</h4>
+        <input type="text" name="vin" class="form-control" style="width: 300px"><br/>
+        <p>
+            <button type="submit" class="btn btn-outline-primary">Знайти ТЗ</button>
+        </p>
+
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr align="center" >
+            <td><b>Марка</b></td>
+            <td><b>Модель</b></td>
+            <td><b>ДНЗ</b></td>
+            <td><b>Колір</b></td>
+            <td><b>Рік випуску</b></td>
+            <td><b>VIN</b></td>
+            <td><b>Район</b></td>
+            <td><b>Дата додавання в группу</b></td>
+            <td><b>Примiтка</b></td>
+            <td><b></b></td>
+        </tr>
+        </thead>
+
+        <c:forEach items="${cars}" var="cars">
+
+            <tr align="center" >
+                <td>${cars.brand}</td>
+                <td>${cars.model}</td>
+                <td>${cars.dnz}</td>
+                <td>${cars.color}</td>
+                <td>${cars.year}</td>
+                <td>${cars.vin}</td>
+                <td>${cars.district}</td>
+                <td>${cars.inGroupDate}</td>
+                <td>${cars.note}</td>
+
+                <td>
+                    <c:if test="${role ne null}">
+                        <form action="/changecar" method="post">
+                            <input type="hidden" name="cId" value="${cars.id}"><br/>
+                            <button type="submit" class="btn btn-outline-primary">Змiнити</button>
+                        </form>
+                    </c:if>
+                </td>
+            </tr>
         </c:forEach>
+    </table>
 
-        <c:url value="/update" var="updateUrl" />
-        <form action="${updateUrl}" method="POST">
-            E-mail:<br/><input type="text" name="email" value="${email}" /><br/>
-            Phone:<br/><input type="text" name="phone" value="${phone}" /><br/>
-            <input type="submit" value="Update" />
-        </form>
+    <c:url value="/logout" var="logoutUrl"/>
+    <a href="/addcar">Додати ТЗ</a></p>
+    <p><a href="${logoutUrl}">Вихiд</a></p>
 
-        <c:url value="/logout" var="logoutUrl" />
-        <p>Click to logout: <a href="${logoutUrl}">LOGOUT</a></p>
-    </div>
+
+</div>
+
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.example.telegramcarbot;
 
 import com.example.telegramcarbot.User.CustomUser;
+import com.example.telegramcarbot.User.UserRole;
 import com.example.telegramcarbot.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -30,8 +31,10 @@ public class MyController {
         String login = user.getUsername();
         CustomUser dbUser = userService.findByLogin(login);
 
+        if (dbUser.getRole().equals(UserRole.ADMIN))
+            model.addAttribute("role", "ADMIN");
+
         model.addAttribute("login", login);
-        model.addAttribute("roles", user.getAuthorities());
 
         return "index";
     }
@@ -52,7 +55,7 @@ public class MyController {
         if ( ! userService.addUser(login, passHash)) {
             model.addAttribute("exists", true);
             model.addAttribute("login", login);
-            return "register";
+            return "addcar";
         }
 
         return "redirect:/";
@@ -65,7 +68,7 @@ public class MyController {
 
     @RequestMapping("/register")
     public String register() {
-        return "register";
+        return "addcar";
     }
 
     @RequestMapping("/admin")
