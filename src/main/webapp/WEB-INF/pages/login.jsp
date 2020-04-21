@@ -19,13 +19,14 @@
         font-family: "Myriad Pro";
         font-style: oblique;
         vertical-align: middle;
+        min-width: content-box;
     }
 
 
     </style>
 </head>
 <body>
-    <div align="center" class='d-none'>
+    <div align="center">
         <c:url value="/j_spring_security_check" var="loginUrl" />
 
         <form action="${loginUrl}" method="POST">
