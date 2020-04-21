@@ -52,13 +52,13 @@ public class MyController {
                          Model model) {
         String passHash = passwordEncoder.encodePassword(password, null);
 
-        if ( ! userService.addUser(login, passHash)) {
+        if ( !userService.addUser(login, passHash)) {
             model.addAttribute("exists", true);
             model.addAttribute("login", login);
-            return "addcar";
+            return "adduser";
         }
-
-        return "redirect:/";
+        userService.addUser(login, passHash);
+        return "redirect:/adduser?success";
     }
 
     @RequestMapping("/login")
@@ -71,9 +71,9 @@ public class MyController {
         return "addcar";
     }
 
-    @RequestMapping("/admin")
-    public String admin(){
-        return "admin";
+    @RequestMapping("/adduser")
+    public String addUser(){
+        return "adduser";
     }
 
     @RequestMapping("/unauthorized")

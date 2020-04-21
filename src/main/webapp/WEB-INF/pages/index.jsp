@@ -12,23 +12,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style>body {
-        background: linear-gradient(to top, #fefcea, #aaadf1);
-        padding: 10px;
-        font-family: "Myriad Pro";
-        font-style: oblique;
-        vertical-align: center;
-        min-width: 1080px;
-
-    }
-
-    .table tr, .table td, .table th {
-        text-align: center;
-        vertical-align: middle;
-    }
+    <link type="text/css" rel="stylesheet" media="screen" href="style.css"/>
 
 
-    </style>
+
+
 </head>
 <body>
 <div align="center">
@@ -87,8 +75,12 @@
         </c:forEach>
     </table>
 
+    <c:if test="${role ne null}">
+            <a href="/adduser">Додати користувача</a></p>
+        <a href="/addcar">Додати ТЗ</a></p>
+    </c:if>
+
     <c:url value="/logout" var="logoutUrl"/>
-    <a href="/addcar">Додати ТЗ</a></p>
     <p><a href="${logoutUrl}">Вихiд</a></p>
 
 

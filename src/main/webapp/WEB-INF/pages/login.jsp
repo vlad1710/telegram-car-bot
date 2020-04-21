@@ -11,18 +11,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style>body {
-        background: #c0c6ed;
-        padding: 10px;
-        font-family: "Myriad Pro";
-        font-style: oblique;
-        vertical-align: middle;
-        min-width: 1080px;
-        max-height: 320px;
-    }
+    <link type="text/css" rel="stylesheet" media="screen" href="style.css"/>
 
 
-    </style>
 </head>
 <body>
     <div align="center">
