@@ -12,15 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>body {
-        background: #fefcea; /* Для старых браузров */
         background: linear-gradient(to top, #fefcea, #aaadf1);
         padding: 10px;
-        border: 1px solid #333;
         font-family: "Myriad Pro";
         font-style: oblique;
         vertical-align: middle;
         min-width: 1080px;
-        max-height: 1920px;
+        max-height: 640px;
     }
 
 
