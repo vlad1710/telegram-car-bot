@@ -18,7 +18,7 @@
         font-style: oblique;
         vertical-align: middle;
         min-width: 1080px;
-        max-height: 640px;
+        max-height: 320px;
     }
 
 
