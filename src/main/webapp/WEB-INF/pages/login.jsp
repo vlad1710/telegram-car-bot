@@ -19,7 +19,7 @@
         font-family: "Myriad Pro";
         font-style: oblique;
         vertical-align: middle;
-        min-width: content-box;
+        display: none;
     }
 
 
