@@ -20,20 +20,18 @@
         font-family: "Myriad Pro";
         font-style: oblique;
         vertical-align: center;
-          }
+    }
 
     .table tr, .table td, .table th {
         text-align: center;
         vertical-align: middle;
     }
-        div{
-            display: none;
-        }
+
 
     </style>
 </head>
 <body>
-<div align="center" class='d-none'>
+<div align="center">
 
     <h3>Пошук ТЗ</h3>
     <form action="/getcar" method="POST">
