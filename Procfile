@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/telegram-car-bot-0.0.1.jar -Dfile.encoding=UTF-8
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/telegram-car-bot-0.0.1.jar
