@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>body {
-        background: cornflowerblue;
+        background: #c0c6ed;
         padding: 10px;
         font-family: "Myriad Pro";
         font-style: oblique;
