@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <div align="center">
+    <div align="center" class='d-none'>
         <c:url value="/j_spring_security_check" var="loginUrl" />
 
         <form action="${loginUrl}" method="POST">
