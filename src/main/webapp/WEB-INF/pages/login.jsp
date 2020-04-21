@@ -20,6 +20,7 @@
         font-style: oblique;
         vertical-align: middle;
         min-width: 1080px;
+        max-height: border-box;
     }
 
 
