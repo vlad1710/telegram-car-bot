@@ -52,7 +52,7 @@
 
         <c:forEach items="${cars}" var="cars" >
 
-            <tr align="center" charset="utf-8">
+            <tr align="center">
                 <td>${cars.brand}</td>
                 <td>${cars.model}</td>
                 <td>${cars.dnz}</td>
