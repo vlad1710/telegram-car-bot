@@ -18,6 +18,8 @@
         font-family: "Myriad Pro";
         font-style: oblique;
         vertical-align: center;
+        min-width: 1080px;
+
     }
 
     .table tr, .table td, .table th {
