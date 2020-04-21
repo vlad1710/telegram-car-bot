@@ -20,7 +20,7 @@
         font-style: oblique;
         vertical-align: middle;
         min-width: 1080px;
-        max-height: available;
+        max-height: 1920px;
     }
 
 
