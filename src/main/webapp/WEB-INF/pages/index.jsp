@@ -27,6 +27,9 @@
         text-align: center;
         vertical-align: middle;
     }
+        div{
+            display: none;
+        }
 
     </style>
 </head>
