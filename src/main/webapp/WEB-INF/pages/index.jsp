@@ -20,7 +20,7 @@
         font-family: "Myriad Pro";
         font-style: oblique;
         vertical-align: center;
-        min-width: 960px    }
+          }
 
     .table tr, .table td, .table th {
         text-align: center;
@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-<div align="center">
+<div align="center" class='d-none'>
 
     <h3>Пошук ТЗ</h3>
     <form action="/getcar" method="POST">
