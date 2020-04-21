@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>body {
-        background: linear-gradient(to top, #fefcea, #aaadf1);
+        background: cornflowerblue;
         padding: 10px;
         font-family: "Myriad Pro";
         font-style: oblique;
