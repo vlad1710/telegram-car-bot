@@ -50,9 +50,9 @@
         </tr>
         </thead>
 
-        <c:forEach items="${cars}" var="cars">
+        <c:forEach items="${cars}" var="cars" >
 
-            <tr align="center" >
+            <tr align="center" charset="utf-8">
                 <td>${cars.brand}</td>
                 <td>${cars.model}</td>
                 <td>${cars.dnz}</td>
