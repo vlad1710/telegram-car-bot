@@ -25,7 +25,7 @@ public class CarController {
     private UserService userService;
 
     @RequestMapping("/addcar")
-    public String addCar(){
+    public String addCar() {
         return "addcar";
     }
 
@@ -44,7 +44,7 @@ public class CarController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String inBaseDate = sdf.format(date);
 
-        carService.addCar(new Car( brand,  model,  dnz,  color, year, vin, district, inGroupDate, inBaseDate, note));
+        carService.addCar(new Car(brand, model, dnz, color, year, vin, district, inGroupDate, inBaseDate, note));
 
         return "redirect:/addcar?success";
     }
@@ -53,7 +53,7 @@ public class CarController {
     public String getCar(@RequestParam(required = false) String dnz,
                          @RequestParam(required = false) String vin,
                          Model mvcModel) {
-    mvcModel.addAttribute("cars", carService.findCarByParams(dnz, vin));
+        mvcModel.addAttribute("cars", carService.findCarByParams(dnz, vin));
         User user = (User) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -65,16 +65,25 @@ public class CarController {
         if (dbUser.getRole().equals(UserRole.ADMIN))
             mvcModel.addAttribute("role", "ADMIN");
 
-    return "index";
+        return "index";
     }
 
     @RequestMapping(value = "/changecar")
     public String changeCar(@RequestParam String cId,
-                         Model model) {
+                            Model model) {
         Long id = Long.parseLong(cId);
         Car car = carRepository.getOne(id);
         model.addAttribute("car", car);
         return "changecar";
+    }
+
+    @RequestMapping(value = "/deletecar")
+    public String deleteCar(@RequestParam String cId,
+                            Model model){
+        Long id = Long.parseLong(cId);
+        carRepository.deleteById(id);
+        model.addAttribute("deleted", "deleted");
+        return "index";
     }
 
     @RequestMapping(value = "/change", method = RequestMethod.POST)

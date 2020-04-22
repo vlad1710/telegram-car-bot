@@ -4,22 +4,17 @@ import com.example.telegramcarbot.User.CustomUser;
 import com.example.telegramcarbot.User.UserRole;
 import com.example.telegramcarbot.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class MyController {
+public class MyController implements ErrorController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ShaPasswordEncoder passwordEncoder;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -37,28 +32,6 @@ public class MyController {
         model.addAttribute("login", login);
 
         return "index";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestParam(required = false) String email,
-                         @RequestParam(required = false) String phone) {
-
-        return "redirect:/";
-    }
-
-    @RequestMapping(value = "/newuser", method = RequestMethod.POST)
-    public String update(@RequestParam String login,
-                         @RequestParam String password,
-                         Model model) {
-        String passHash = passwordEncoder.encodePassword(password, null);
-
-        if ( !userService.addUser(login, passHash)) {
-            model.addAttribute("exists", true);
-            model.addAttribute("login", login);
-            return "adduser";
-        }
-        userService.addUser(login, passHash);
-        return "redirect:/adduser?success";
     }
 
     @RequestMapping("/login")
@@ -81,5 +54,15 @@ public class MyController {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("login", user.getUsername());
         return "unauthorized";
+    }
+
+    @RequestMapping("/error")
+    public String handleError() {
+        return "error";
+    }
+
+    @Override
+    public String getErrorPath() {
+        return "/error";
     }
 }

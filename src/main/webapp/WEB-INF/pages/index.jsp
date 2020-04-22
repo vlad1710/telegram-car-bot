@@ -21,6 +21,10 @@
 <body>
 <div align="center">
 
+    <c:if test="${deleted ne null}">
+        <p>Видалено.</p>
+    </c:if>
+
     <h3>Пошук ТЗ</h3>
     <form action="/getcar" method="POST">
 

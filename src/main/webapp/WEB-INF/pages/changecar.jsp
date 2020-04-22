@@ -75,6 +75,9 @@
                 <td>
                     <button type="submit" class="btn btn-primary">Змінити</button>
                 </td>
+                <td>
+                    <button formaction="/deletecar" class="btn btn-outline-primary">Видалити</button>
+                </td>
             </tr>
         </table>
     </form>
