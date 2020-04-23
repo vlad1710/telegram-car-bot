@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.telegram.telegrambots.ApiContextInitializer;
 
 @SpringBootApplication
 public class TelegramCarBotApplication {
 
     public static void main(String[] args) {
+        ApiContextInitializer.init();
         SpringApplication.run(TelegramCarBotApplication.class, args);
     }
 
