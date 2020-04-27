@@ -20,6 +20,20 @@ public class CarService {
 
         return carRepository.findByParams("%" + dnz + "%","%" + vin + "%");}
 
+    @Transactional(readOnly = true)
+    public List<Car> findCarByDnz(String dnz) {
+        if(dnz.isEmpty())
+            dnz = "-";
+
+        return carRepository.findByDnz("%" + dnz + "%");}
+
+    @Transactional(readOnly = true)
+    public List<Car> findCarByVin(String vin) {
+        if(vin.isEmpty())
+            vin = "-";
+
+        return carRepository.findByVin("%" + vin + "%");}
+
     @Transactional
     public void addCar(Car car) {
         carRepository.save(car);
@@ -45,4 +59,13 @@ public class CarService {
         carRepository.save(car);
     }
 
+    @Transactional
+    public Car getOne(Long id) {
+        return carRepository.getOne(id);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        carRepository.deleteById(id);
+    }
 }

@@ -20,8 +20,6 @@ public class CarController {
     @Autowired
     CarService carService;
     @Autowired
-    CarRepository carRepository;
-    @Autowired
     private UserService userService;
 
     @RequestMapping("/addcar")
@@ -72,7 +70,7 @@ public class CarController {
     public String changeCar(@RequestParam String cId,
                             Model model) {
         Long id = Long.parseLong(cId);
-        Car car = carRepository.getOne(id);
+        Car car = carService.getOne(id);
         model.addAttribute("car", car);
         return "changecar";
     }
@@ -81,7 +79,7 @@ public class CarController {
     public String deleteCar(@RequestParam String cId,
                             Model model){
         Long id = Long.parseLong(cId);
-        carRepository.deleteById(id);
+        carService.deleteById(id);
         model.addAttribute("deleted", "deleted");
         return "index";
     }
@@ -102,21 +100,11 @@ public class CarController {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String inBaseDate = sdf.format(date);
+
+        carService.update(cId, brand, model, dnz, color, year, vin, district, inGroupDate, inBaseDate, note);
         Long id = Long.parseLong(cId);
-        Car car = carRepository.getOne(id);
+        Car car = carService.getOne(id);
 
-        car.setBrand(brand);
-        car.setModel(model);
-        car.setDnz(dnz);
-        car.setColor(color);
-        car.setYear(year);
-        car.setVin(vin);
-        car.setDistrict(district);
-        car.setInGroupDate(inGroupDate);
-        car.setInBaseDate(inBaseDate);
-        car.setNote(note);
-
-        carRepository.save(car);
         mvcModel.addAttribute("car", car);
 
         return "changecar";

@@ -42,4 +42,33 @@ public class Car {
         this.inBaseDate = inBaseDate;
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Марка: " + brand + "\n")
+                .append("Модель: " + model + "\n")
+                .append("ДНЗ: " + dnz + "\n");
+
+        if (!color.isEmpty())
+            sb.append("Колір: " + color + "\n");
+
+        if (!year.isEmpty())
+            sb.append("Рік випуску: " + year + "\n");
+
+        if (!vin.isEmpty())
+            sb.append("VIN: " + vin + "\n");
+
+        if (!district.isEmpty())
+            sb.append("Район: " + district + "\n");
+
+        if (!inGroupDate.isEmpty())
+            sb.append("Дата додавання в группу: " + inGroupDate + "\n");
+
+        if (!note.isEmpty())
+            sb.append("Примiтка: " + note + "\n\n");
+
+        return sb.toString();
+    }
 }

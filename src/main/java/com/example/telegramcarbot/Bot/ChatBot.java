@@ -1,6 +1,8 @@
 package com.example.telegramcarbot.Bot;
 
 
+import com.example.telegramcarbot.Car.Car;
+import com.example.telegramcarbot.Car.CarService;
 import com.example.telegramcarbot.ChatUser.ChatUser;
 import com.example.telegramcarbot.ChatUser.ChatUserRepository;
 import org.apache.logging.log4j.LogManager;
@@ -22,10 +24,10 @@ public class ChatBot extends TelegramLongPollingBot {
 
     @Autowired
     ChatUserRepository chatUserRepository;
+    @Autowired
+    CarService carService;
 
     private static final Logger LOGGER = LogManager.getLogger(ChatBot.class);
-    private static final String BROADCAST = "broadcast ";
-    private static final String LIST_USERS = "users";
 
     @Value("${bot.name}")
     private String botName;
@@ -51,11 +53,35 @@ public class ChatBot extends TelegramLongPollingBot {
 
         final String text = update.getMessage().getText();
         final long chatId = update.getMessage().getChatId();
+        List<Car> cars;
 
         ChatUser user = chatUserRepository.findChatUserByChatId(chatId);
 
-        if (checkIfAdminCommand(user, text))
-            return;
+        if (user.getStateId() == 1){
+            cars = carService.findCarByDnz(text);
+            StringBuilder sb = new StringBuilder();
+
+            if(cars.isEmpty())
+                sb.append("Не знайдено.");
+
+            for (Car c : cars) {
+                sb.append(c.toString());
+            }
+
+            sendMessage(chatId, sb.toString());
+        }
+        else if (user.getStateId() == 2){
+            cars = carService.findCarByVin(text);
+            StringBuilder sb = new StringBuilder();
+
+            if(cars.isEmpty())
+                sb.append("Не знайдено.");
+
+            for (Car c : cars) {
+                sb.append(c.toString());
+            }
+            sendMessage(chatId, sb.toString());
+        }
 
         BotContext context;
         BotState state;
@@ -89,27 +115,6 @@ public class ChatBot extends TelegramLongPollingBot {
 
     }
 
-    private boolean checkIfAdminCommand(ChatUser user, String text){
-        if(user == null || !user.getAdmin())
-            return false;
-
-        if (text.startsWith(BROADCAST)){
-            LOGGER.info("Admin command recieved: " + BROADCAST);
-
-            text = text.substring(BROADCAST.length());
-            broadcast(text);
-
-            return true;
-        }else if (text.equals(LIST_USERS)){
-            LOGGER.info("Admin command recieved: " + LIST_USERS);
-
-            listUsers(user);
-            return true;
-        }
-
-        return false;
-    }
-
     private void sendMessage(long chatId, String text){
         SendMessage message = new SendMessage()
                 .setChatId(chatId)
@@ -120,52 +125,4 @@ public class ChatBot extends TelegramLongPollingBot {
             e.printStackTrace();
         }
     }
-
-    private void listUsers(ChatUser admin){
-        StringBuilder sb = new StringBuilder("All users list:\r\n");
-        List<ChatUser> users = chatUserRepository.findAll();
-
-        users.forEach(user ->
-                sb.append(user.getId())
-                    .append(' ')
-                    .append(user.getPhone())
-                    .append("\r\n")
-        );
-
-        sendMessage(admin.getChatId(), sb.toString());
-    }
-
-    private void broadcast(String text){
-        List<ChatUser> users = chatUserRepository.findAll();
-        users.forEach(user -> sendMessage(user.getChatId(), text));
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

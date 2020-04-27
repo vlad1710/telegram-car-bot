@@ -18,19 +18,8 @@ public class ChatUser {
 
     private Long chatId;
     private Integer stateId;
-    private String phone;
-    private Boolean admin = false;
 
     public ChatUser() {
-    }
-
-
-
-    public ChatUser(Long chatId, Integer stateId, String phone, Boolean admin) {
-        this.chatId = chatId;
-        this.stateId = stateId;
-        this.phone = phone;
-        this.admin = admin;
     }
 
     public ChatUser(Long chatId, Integer stateId) {

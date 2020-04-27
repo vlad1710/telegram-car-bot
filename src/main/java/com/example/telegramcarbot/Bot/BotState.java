@@ -6,21 +6,49 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public enum BotState {
 
     Start{
+        private BotState nextState;
+
         @Override
         public void enter(BotContext context) {
-            sendMessage(context, "Hello");
+            sendMessage(context, "Виберiть пошук.");
+        }
+
+        @Override
+        public void handleInput(BotContext context) {
+            String s = context.getInput();
+
+            if (s.equals("/dnz")){
+                nextState = EnterDnz;
+            }
+            else if (s.equals("/vin")){
+                nextState = EnterVin;
+            }
+            else nextState = Start;
         }
 
         @Override
         public BotState nextState(){
-            return EnterDnz;
+            return nextState;
         }
     },
 
     EnterDnz{
         @Override
         public void enter(BotContext context) {
-            sendMessage(context, "Enter dnz");
+            sendMessage(context, "Введiть ДНЗ.");
+        }
+
+        @Override
+        public BotState nextState(){
+            return Approved;
+        }
+
+    },
+
+    EnterVin{
+        @Override
+        public void enter(BotContext context) {
+            sendMessage(context, "Введiть VIN.");
         }
 
         @Override
@@ -33,7 +61,7 @@ public enum BotState {
     Approved(false){
         @Override
         public void enter(BotContext context) {
-            sendMessage(context, "Done");
+            sendMessage(context, "Пошук завершено.");
         }
 
         @Override
