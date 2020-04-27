@@ -57,6 +57,26 @@ public class ChatBot extends TelegramLongPollingBot {
 
         ChatUser user = chatUserRepository.findChatUserByChatId(chatId);
 
+        BotContext context;
+        BotState state;
+
+        if(user == null){
+            state = BotState.getInitialState();
+
+            user = new ChatUser(chatId, state.ordinal());
+            chatUserRepository.save(user);
+
+            context = BotContext.of(this, user, text);
+            state.enter(context);
+
+            LOGGER.info("New user registered: " + chatId);
+        }else {
+            context = BotContext.of(this, user, text);
+            state = BotState.byId(user.getStateId());
+
+            LOGGER.info("Update recieved for this user in state: " + state);
+        }
+
         if (user.getStateId() == 1){
             cars = carService.findCarByDnz(text);
             StringBuilder sb = new StringBuilder();
@@ -81,26 +101,6 @@ public class ChatBot extends TelegramLongPollingBot {
                 sb.append(c.toString());
             }
             sendMessage(chatId, sb.toString());
-        }
-
-        BotContext context;
-        BotState state;
-
-        if(user == null){
-            state = BotState.getInitialState();
-
-            user = new ChatUser(chatId, state.ordinal());
-            chatUserRepository.save(user);
-
-            context = BotContext.of(this, user, text);
-            state.enter(context);
-
-            LOGGER.info("New user registered: " + chatId);
-        }else {
-            context = BotContext.of(this, user, text);
-            state = BotState.byId(user.getStateId());
-
-            LOGGER.info("Update recieved for this user in state: " + state);
         }
 
         state.handleInput(context);

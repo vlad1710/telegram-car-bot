@@ -110,7 +110,7 @@ public enum BotState {
     public void handleInput(BotContext context){
     }
 
-    public abstract void enter (BotContext context);
+    public abstract void enter(BotContext context);
     public abstract BotState nextState();
 
 }
